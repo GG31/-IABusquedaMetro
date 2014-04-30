@@ -1,1 +1,7 @@
 *~
+*.class
+.metadata
+Metro/.settings
+Metro/bin
+Metro/.classpath
+Metro/.project

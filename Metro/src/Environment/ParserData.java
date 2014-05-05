@@ -9,7 +9,6 @@ public class ParserData {
 	private final String FILENAME = "resources/data.txt";
 	private int[][] distances;
 	private Station[] stations;
-	private ArrayList<Line> lines;
 
 	public ParserData() {
 		read();
@@ -29,7 +28,7 @@ public class ParserData {
 					s = sc.nextLine();
 					parseStations(s);
 					break;
-				case "*Lines":
+				/*case "*Lines":
 					int j = 0;
 					s = sc.nextLine();
 					this.lines = new ArrayList<>();
@@ -39,19 +38,21 @@ public class ParserData {
 						j++;
 						s = sc.nextLine();
 					} while (!s.equals("*EndLines"));
-					break;
+					break;*/
 				case "*Links":
 					int i = 0;
 					while (sc.hasNextLine()) {
 						s = sc.nextLine();
 						if (s.charAt(0) == '%') {
-							//if (sc.hasNextLine())
-								//s = sc.nextLine();
+							// if (sc.hasNextLine())
+							// s = sc.nextLine();
 						} else {
 							parseLinks(s, i);
 							i++;
 						}
 					}
+					break;
+				default:
 					break;
 				}
 
@@ -86,23 +87,14 @@ public class ParserData {
 				for (int j = Integer.parseInt(sBlock[0]); j <= Integer
 						.parseInt(sBlock[1]); j++) {
 					stationLine.add(this.stations[j]);
-					//System.out.println(this.stations[j].getName());
-					//System.out.println(stationLine.get(stationLine.size()-1).getName());
+					// System.out.println(this.stations[j].getName());
+					// System.out.println(stationLine.get(stationLine.size()-1).getName());
 				}
 			} else {
 				stationLine.add(this.stations[Integer.parseInt(sBlock[0])]);
 			}
 
 		}
-
-		Line l = new Line(numLine, stationLine);
-		//System.out.println(l.getStationsWay().get(0).getName());
-		this.lines.add(l);
-		/*System.out.println(lines.toString());
-		for(int i=0; i<lines.get(numLine).getStationsWay().size(); i++){
-			System.out.println(lines.get(numLine).getStationsWay().toString());
-		}*/
-
 	}
 
 	/* Ok */
@@ -132,17 +124,6 @@ public class ParserData {
 
 	public Station[] getStation() {
 		return this.stations;
-	}
-
-	public ArrayList<Line> getLines() {
-		/*System.out.println("FUCK");
-		for(int i=0; i<this.lines.size(); i++){
-			System.out.println(this.lines.toString());
-			for(int j=0; j<this.lines.get(i).getStationsWay().size(); j++){
-				System.out.println(this.lines.get(i).getStationsWay().get(j).getName());
-			}
-		}*/
-		return this.lines;
 	}
 
 	public int[][] getDistances() {

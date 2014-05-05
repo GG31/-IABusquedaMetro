@@ -11,9 +11,9 @@ import Controller.FindWayListener;
 public class Model {
 	private int[][] distance;
 	private Station[] stations;
-	private ArrayList<Line> lines;
 	private ParserData parser;
 	private AlgoA algo;
+	private ArrayList<Station> way;
 
 	// MVC
 	private EventListenerList ecouteurs;
@@ -22,10 +22,9 @@ public class Model {
 		this.parser = new ParserData();
 		this.distance = this.parser.getDistances();
 		this.stations = this.parser.getStation();
-		this.lines = new ArrayList<>();
-		this.lines = this.parser.getLines();
+		this.way = new ArrayList<>();
 
-		this.algo = new AlgoA();
+		this.algo = new AlgoA(this.distance, this.stations);
 
 		this.ecouteurs = new EventListenerList();
 	}
@@ -34,8 +33,7 @@ public class Model {
 	public void ok(String origin, String destination) {
 		//Encontrar las estaciones que tienen estos nombres
 		Station si = null, sf = null;
-		algo.findWay(si, sf);
-		this.stations = algo.getWay();
+		this.way = algo.findWay(si, sf);
 		fireWayChanged();//Draw way
 	}
 

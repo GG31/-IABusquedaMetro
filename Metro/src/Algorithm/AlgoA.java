@@ -5,10 +5,14 @@ import java.util.ArrayList;
 import Environment.Station;
 
 public class AlgoA {
-	private Station[] way;
-	
-	public AlgoA() {
+	private Station[] stations;
+	private int[][] distances;
 
+	private ArrayList<Station> way;
+
+	public AlgoA(int[][] distances, Station[] stations) {
+		this.distances = distances;
+		this.stations = stations;
 	}
 
 	/* Devuelve el camino más corto entre si y sf */
@@ -25,10 +29,4 @@ public class AlgoA {
 	private void find() {
 
 	}
-	
-	public Station[] getWay(){
-		return this.way;
-	}
-	
-	
 }

@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import Environment.Station;
 
 public class AlgoA {
-
+	private Station[] way;
+	
 	public AlgoA() {
 
 	}
@@ -24,4 +25,10 @@ public class AlgoA {
 	private void find() {
 
 	}
+	
+	public Station[] getWay(){
+		return this.way;
+	}
+	
+	
 }

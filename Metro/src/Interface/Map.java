@@ -42,7 +42,7 @@ public class Map implements ActionListener, FindWayListener {
 
 	public void wayChanged(FindWayEvent event) {
 		clear(); // Clean the way existing to do other
-		Station[] s = event.getStationsWay();
+		ArrayList<Station> s = event.getStationsWay();
 
 	}
 

@@ -61,12 +61,12 @@ public class Model {
 		FindWayListener[] listeEcouteurs = (FindWayListener[]) ecouteurs
 				.getListeners(FindWayListener.class);
 		for (FindWayListener listener : listeEcouteurs) {
-			listener.wayChanged(new FindWayEvent(this, getStations()));
+			listener.wayChanged(new FindWayEvent(this, getWay()));
 		}
 	}
 	
-	public Station[] getStations(){
-		return this.stations;
+	public ArrayList<Station> getWay(){
+		return this.way;
 	}
 
 }

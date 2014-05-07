@@ -28,7 +28,7 @@ public class AlgoA {
 		this.si = si;
 		this.sf = sf;
 		this.openedList.add(si);
-		find();
+		find(si);
 		return null;
 	}
 
@@ -37,24 +37,32 @@ public class AlgoA {
 	 * atributos, almacena en wayToHere de cada nodo el camino más corto para ir
 	 * al nodo desde si
 	 */
-	private void find() {
-		// Poner el primer nodo de la lista abierta en la lista cerrada
-		this.closedList.add(this.openedList.get(0));
-		this.openedList.remove(0);
-
-		// Calcular f por cada hijo
-		Station padre = this.closedList.get(this.closedList.size() - 1);
+	private void find(Station padre) {
+		
 		for (int i = 0; i < padre.getNeighbours().size(); i++) {
-			int g = this.distances[padre.getId()][padre.getNeighbours().get(i)
-					.getId()];
-			padre.getNeighbours().get(i).setG(g + padre.getG());
+			int gPH = this.distances[padre.getId()][padre.getNeighbours()
+					.get(i).getId()];
+			int g = gPH + padre.getG();
+			int f = g
+					+ this.distances[padre.getNeighbours().get(i).getId()][this.sf
+							.getId()];
 
-			int h = this.distances[padre.getNeighbours().get(i).getId()][this.sf
-					.getId()];
-			padre.getNeighbours().get(i).calculF(h);
+			if (f < padre.getNeighbours().get(i).getF()
+					&& padre.getNeighbours().get(i).getF() != 0) {
+				padre.getNeighbours().get(i).setG(g);
+				padre.getNeighbours().get(i).setF(f);
+				// Mettre le chemin à jour
+				padre.getNeighbours().get(i).addWayToHere(padre.getWayToHere());
+				padre.getNeighbours().get(i).addWayToHere(padre);
+				
+				if(this.closedList.contains(padre.getNeighbours().get(i))){
+					//Faire hériter du nouveau chemin d'accés à tous les fils
+					find(padre.getNeighbours().get(i));
+				}
+			}
 		}
 
-		// Almacenar los vecinos
+		// Almacenar los vecinos en la lista abierta
 		almacenar(padre.getNeighbours());
 
 		// Reordenar la lista abierta por orden de f
@@ -63,12 +71,23 @@ public class AlgoA {
 		this.openedList.clear();
 		reordenar(stationClone);
 		
-		
+		// Poner el primer nodo de la lista abierta en la lista cerrada
+		this.closedList.add(this.openedList.get(0));
+		this.openedList.remove(0);
+
+		// Calcular f por cada hijo
+		Station padre1 = this.closedList.get(this.closedList.size() - 1);
+		if(!padre1.equals(sf)){
+			find(padre1);
+		}else{
+			this.way.addAll(padre1.getWayToHere());
+			this.way.add(sf);
+		}
 	}
 
 	public void almacenar(ArrayList<Station> s) {
 		for (int i = 0; i < s.size(); i++) {
-			if (!this.openedList.contains(s.get(i))) {
+			if (!this.openedList.contains(s.get(i)) && !this.closedList.contains(s.get(i))) {
 				this.openedList.add(s.get(i));
 			}
 		}
@@ -84,12 +103,12 @@ public class AlgoA {
 			}
 		}
 	}
-	
-	public int findMin(ArrayList<Station>s){
-		int j=0;
+
+	public int findMin(ArrayList<Station> s) {
+		int j = 0;
 		int max = s.get(0).getF();
-		for(int i=1; i<s.size(); i++){
-			if(max<s.get(i).getF()){
+		for (int i = 1; i < s.size(); i++) {
+			if (max < s.get(i).getF()) {
 				max = s.get(i).getF();
 				j = i;
 			}

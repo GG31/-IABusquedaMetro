@@ -49,4 +49,21 @@ public class Station {
 	public int getF() {
 		return this.f;
 	}
+
+	public void setF(int f) {
+		this.f = f;
+	}
+	
+	public void addWayToHere(ArrayList<Station>s){
+		this.wayToHere.clear();
+		this.wayToHere.addAll(s);
+	}
+	
+	public void addWayToHere(Station s){
+		this.wayToHere.add(s);
+	}
+	
+	public ArrayList<Station> getWayToHere(){
+		return this.wayToHere;
+	}
 }

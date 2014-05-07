@@ -15,17 +15,38 @@ public class Station {
 		this.stationNeighbours = new ArrayList<>();
 		this.wayToHere = new ArrayList<>();
 		this.name = name;
+		this.g = 0;
 	}
-	
-	public void addStationNeighbours(Station neighbour){
+
+	public void addStationNeighbours(Station neighbour) {
 		this.stationNeighbours.add(neighbour);
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return this.name;
 	}
-	
-	public ArrayList<Station> getNeighbours(){
+
+	public int getId() {
+		return this.id;
+	}
+
+	public ArrayList<Station> getNeighbours() {
 		return this.stationNeighbours;
+	}
+
+	public int getG() {
+		return this.g;
+	}
+
+	public void setG(int g) {
+		this.g = g;
+	}
+
+	public void calculF(int h) {
+		this.f = this.g + h;
+	}
+
+	public int getF() {
+		return this.f;
 	}
 }

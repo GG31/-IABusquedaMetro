@@ -29,7 +29,7 @@ public class AlgoA {
 		this.sf = sf;
 		this.openedList.add(si);
 		find(si);
-		return null;
+		return this.way;
 	}
 
 	/*
@@ -37,28 +37,40 @@ public class AlgoA {
 	 * atributos, almacena en wayToHere de cada nodo el camino más corto para ir
 	 * al nodo desde si
 	 */
+	int tour = 0;
+
 	private void find(Station padre) {
-		
+		System.out.println("tour " + tour);
+		tour++;
+		// Para cada hijo del padre
 		for (int i = 0; i < padre.getNeighbours().size(); i++) {
+			// Encuentra distancia entre padre e hijo
 			int gPH = this.distances[padre.getId()][padre.getNeighbours()
 					.get(i).getId()];
+			// Calcula g, la distancia hasta el padre + la distance padre-hijo
 			int g = gPH + padre.getG();
+			// Calcula f, g+ la distancia hasta el destino sf
 			int f = g
 					+ this.distances[padre.getNeighbours().get(i).getId()][this.sf
 							.getId()];
 
-			if (f < padre.getNeighbours().get(i).getF()
-					&& padre.getNeighbours().get(i).getF() != 0) {
+			// Si f calculado es menor que otro f calculado para este hijo i
+			if ((f < padre.getNeighbours().get(i).getF() && padre
+					.getNeighbours().get(i).getF() != 0)
+					|| padre.getNeighbours().get(i).getF() == 0) {
+				// Actualiza g y f
 				padre.getNeighbours().get(i).setG(g);
 				padre.getNeighbours().get(i).setF(f);
-				// Mettre le chemin à jour
+				// Actualiza el camino
 				padre.getNeighbours().get(i).addWayToHere(padre.getWayToHere());
 				padre.getNeighbours().get(i).addWayToHere(padre);
-				
-				if(this.closedList.contains(padre.getNeighbours().get(i))){
-					//Faire hériter du nouveau chemin d'accés à tous les fils
-					find(padre.getNeighbours().get(i));
-				}
+				// Si el hijo hace parte de la lista cerrada
+				/*
+				 * if (this.closedList.contains(padre.getNeighbours().get(i))) {
+				 * // Faire hériter du nouveau chemin d'accés à tous les fils
+				 * System.out.println("PASO");
+				 * find(padre.getNeighbours().get(i)); }
+				 */
 			}
 		}
 
@@ -70,29 +82,44 @@ public class AlgoA {
 				.clone();
 		this.openedList.clear();
 		reordenar(stationClone);
-		
+
 		// Poner el primer nodo de la lista abierta en la lista cerrada
 		this.closedList.add(this.openedList.get(0));
 		this.openedList.remove(0);
 
 		// Calcular f por cada hijo
 		Station padre1 = this.closedList.get(this.closedList.size() - 1);
-		if(!padre1.equals(sf)){
+		// Si el último nodo puesto en la lista cerrada no es el nodo final
+		if (!padre1.equals(sf)) {
+			// Llamar de nuevo find
 			find(padre1);
-		}else{
+		} else {// Si el último nodo de la lista cerrada es el destino
 			this.way.addAll(padre1.getWayToHere());
 			this.way.add(sf);
 		}
 	}
 
+	/**
+	 * Pone en la lista abierta todos las estaciones de s que no ya están en la
+	 * lista abierta ni en la lista cerrada
+	 * 
+	 * @param s
+	 */
 	public void almacenar(ArrayList<Station> s) {
 		for (int i = 0; i < s.size(); i++) {
-			if (!this.openedList.contains(s.get(i)) && !this.closedList.contains(s.get(i))) {
+			if (!this.openedList.contains(s.get(i))
+					&& !this.closedList.contains(s.get(i))) {
 				this.openedList.add(s.get(i));
 			}
 		}
 	}
 
+	/**
+	 * Reordena la lista de estación por mínimo de f, almacena la nueva lista en
+	 * la lista abierta : openedList
+	 * 
+	 * @param stationClone
+	 */
 	public void reordenar(ArrayList<Station> stationClone) {
 		if (stationClone.size() > 0) {
 			for (int i = 0; i < stationClone.size(); i++) {
@@ -104,15 +131,34 @@ public class AlgoA {
 		}
 	}
 
+	/**
+	 * Devuelve el id de la estación que tiene el f mínimo en toda la lista
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public int findMin(ArrayList<Station> s) {
 		int j = 0;
-		int max = s.get(0).getF();
+		int min = s.get(0).getF();
 		for (int i = 1; i < s.size(); i++) {
-			if (max < s.get(i).getF()) {
-				max = s.get(i).getF();
+			if (min > s.get(i).getF()) {
+				min = s.get(i).getF();
 				j = i;
 			}
 		}
 		return j;
+	}
+
+	// Getters and Setters
+	public ArrayList<Station> getOpenedList() {
+		return this.openedList;
+	}
+
+	public ArrayList<Station> getClosedList() {
+		return this.closedList;
+	}
+
+	public void setClosedList(Station s) {
+		this.closedList.add(s);
 	}
 }

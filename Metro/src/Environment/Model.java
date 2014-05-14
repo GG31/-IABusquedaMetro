@@ -31,10 +31,22 @@ public class Model {
 
 	/* Si pinchas en ok */
 	public void ok(String origin, String destination) {
-		//Encontrar las estaciones que tienen estos nombres
+		// Encontrar las estaciones que tienen estos nombres
 		Station si = null, sf = null;
+		for (int i = 0; i < stations.length; i++) {
+			if (stations[i].getName().equals(origin)) {
+				si = stations[i];
+			} else if (stations[i].getName().equals(destination)) {
+				sf = stations[i];
+			}
+			if (sf != null && si != null)
+				break;
+		}
+		if (sf == null || si == null) {
+			System.out.println("Una de las dos estaciones no existen");
+		}
 		this.way = algo.findWay(si, sf);
-		fireWayChanged();//Draw way
+		fireWayChanged();// Draw way
 	}
 
 	/*
@@ -64,8 +76,8 @@ public class Model {
 			listener.wayChanged(new FindWayEvent(this, getWay()));
 		}
 	}
-	
-	public ArrayList<Station> getWay(){
+
+	public ArrayList<Station> getWay() {
 		return this.way;
 	}
 

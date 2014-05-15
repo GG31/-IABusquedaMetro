@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import Algorithm.AlgoA;
+import Environment.AlgoA;
 import Environment.Model;
 import Environment.ParserData;
 import Environment.Station;
@@ -19,7 +19,7 @@ public class AlgoTest {
 	@Before
 	public void setUp() {
 		parser = new ParserData();
-		algo = new AlgoA(parser.getDistances(), parser.getStation());
+		algo = new AlgoA(parser.getDistances());
 	}
 
 	public void tearDown() {
@@ -109,7 +109,7 @@ public class AlgoTest {
 	@Test
 	public void testFind1() {
 		Model model = new Model();
-		model.ok("San Bernabé", "Universidad");
+		model.ok("Central", "General I. Zaragoza");
 		System.out.println(model.getWay());
 		for(int i=0; i<model.getWay().size(); i++){
 			System.out.print(model.getWay().get(i).getName()+"-");

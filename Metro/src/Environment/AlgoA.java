@@ -1,31 +1,30 @@
-package Algorithm;
+package Environment;
 
 import java.util.ArrayList;
 
 import Environment.Station;
 
 public class AlgoA {
-	private Station si, sf;
-	private Station[] stations;
+	private Station sf;
+	//private Station[] stations;
 	private int[][] distances;
 	private ArrayList<Station> openedList;
 	private ArrayList<Station> closedList;
 
 	private ArrayList<Station> way;
 
-	public AlgoA(int[][] distances, Station[] stations) {
+	public AlgoA(int[][] distances) {
 		this.distances = distances;
-		this.stations = stations;
+		//this.stations = stations;
 		this.openedList = new ArrayList<>();
 		this.closedList = new ArrayList<>();
 		this.way = new ArrayList<>();
-		this.si = null;
+		//this.si = null;
 		this.sf = null;
 	}
 
 	/* Devuelve el camino más corto entre si y sf */
 	public ArrayList<Station> findWay(Station si, Station sf) {
-		this.si = si;
 		this.sf = sf;
 		this.openedList.add(si);
 		find(si);

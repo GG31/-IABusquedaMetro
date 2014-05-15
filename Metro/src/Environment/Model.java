@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.event.EventListenerList;
 
-import Algorithm.AlgoA;
 import Controller.FindWayEvent;
 import Controller.FindWayListener;
 
@@ -24,7 +23,7 @@ public class Model {
 		this.stations = this.parser.getStation();
 		this.way = new ArrayList<>();
 
-		this.algo = new AlgoA(this.distance, this.stations);
+		this.algo = new AlgoA(this.distance);
 
 		this.ecouteurs = new EventListenerList();
 	}

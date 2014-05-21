@@ -1,5 +1,7 @@
 package Controller;
 
+import java.io.IOException;
+
 import Environment.Model;
 import Interface.Map;
 
@@ -9,7 +11,12 @@ public class Controller {
 
 	public Controller(Model model) {
 		this.model = model;
-		this.vue1 = new Map(this);
+		try {
+			this.vue1 = new Map(this, model.getStations());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		addListenersToModel();
 	}
 

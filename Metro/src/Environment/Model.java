@@ -80,4 +80,8 @@ public class Model {
 		return this.way;
 	}
 
+	public Station[] getStations() {
+		return this.stations;
+	}
+
 }

@@ -28,14 +28,22 @@ public class Model {
 		this.ecouteurs = new EventListenerList();
 	}
 
-	/* Si pinchas en ok */
+	/**
+	 * Busca los objetos estaciones correspondientes al origen y destino, y
+	 * llama al algoritmo para encontrar el camino
+	 * 
+	 * @param origin
+	 * @param destination
+	 */
 	public void ok(String origin, String destination) {
 		// Encontrar las estaciones que tienen estos nombres
+		clearAllStation();
 		Station si = null, sf = null;
 		for (int i = 0; i < stations.length; i++) {
 			if (stations[i].getName().equals(origin)) {
 				si = stations[i];
-			} if (stations[i].getName().equals(destination)) {
+			}
+			if (stations[i].getName().equals(destination)) {
 				sf = stations[i];
 			}
 			if (sf != null && si != null)
@@ -49,18 +57,20 @@ public class Model {
 		fireWayChanged();// Draw way
 	}
 
-	/*
-	 * public String toStringStation(){ String s = ""; return s; }
-	 * 
-	 * public String toStringLine(){ String s = ""; //for(int i=0;
-	 * i<this.lines.size(); i++){ for(int j=0;
-	 * j<this.lines.get(0).getStationsWay().size(); j++){ s +=
-	 * this.lines.get(0).getStationsWay().get(j).getName(); } //} return s; }
-	 * public String toStringDistance() { String s = ""; for (int i = 0; i <
-	 * this.distance.length; i++) { for (int j = 0; j < this.distance.length;
-	 * j++) { s += " " + this.distance[i][j]; } s += "\n"; } return s; }
+	/**
+	 * Limpia todas las estaciones de los posibles g, h, f y caminos registrados
 	 */
+	private void clearAllStation() {
+		for (int i = 0; i < this.stations.length; i++) {
+			this.stations[i].clear();
+		}
+	}
 
+	/**
+	 * Añade listener
+	 * 
+	 * @param ecouteur
+	 */
 	public void addListener(FindWayListener ecouteur) {
 		ecouteurs.add(FindWayListener.class, ecouteur);
 	}
@@ -77,6 +87,7 @@ public class Model {
 		}
 	}
 
+	// Getters
 	public ArrayList<Station> getWay() {
 		return this.way;
 	}

@@ -1,7 +1,5 @@
 package Controller;
 
-import java.io.IOException;
-
 import Environment.Model;
 import Interface.Map;
 
@@ -11,30 +9,27 @@ public class Controller {
 
 	public Controller(Model model) {
 		this.model = model;
-		try {
-			this.vue1 = new Map(this, model.getStations());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.vue1 = new Map(this, model.getStations());
 		addListenersToModel();
 	}
 
+	/**
+	 * Añade un listener al modelo
+	 */
 	private void addListenersToModel() {
 		this.model.addListener(vue1);
 	}
 
-	/*public void displayViews() {
-		vue1.display();
-	}
-
-	public void closeViews() {
-		vue1.close();
-	}*/
-
+	/**
+	 * Si pinchamos en ok, este método está llamado para empezar a buscar el
+	 * camino
+	 * 
+	 * @param origin
+	 * @param destination
+	 * @throws Exception
+	 */
 	public void notifyWayChanged(String origin, String destination)
 			throws Exception {
-		System.out.println("notif");
 		model.ok(origin, destination);
 	}
 }

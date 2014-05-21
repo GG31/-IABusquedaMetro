@@ -2,10 +2,7 @@ package Interface;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -29,24 +26,21 @@ import Controller.FindWayListener;
 import Environment.Station;
 
 public class Map extends JFrame implements ActionListener, FindWayListener {
+	private static final long serialVersionUID = 1L;
 	private final int RADIUS = 10;
 	private final String MAPFILE = "resources/MapaMetroMonterrey.jpg";
 	private final ArrayList<Position> POSITIONS = new ArrayList<Position>() {
 		{
-			// add(new Position(10, 10));
-			// add(new Position(30, 10));
 			add(new Position(144, 127));
 			add(new Position(203, 179));
 			add(new Position(242, 215));
 			add(new Position(280, 248));
-			// Penitenciana
-			add(new Position(312, 285));
+			add(new Position(312, 285));// Penitenciana
 			add(new Position(312, 325));
 			add(new Position(312, 359));
 			add(new Position(312, 399));
 			add(new Position(312, 438));
-			// Edison
-			add(new Position(358, 451));
+			add(new Position(358, 451));// Edison
 			add(new Position(410, 451));
 			add(new Position(472, 451));
 			add(new Position(533, 451));
@@ -56,8 +50,7 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 			add(new Position(753, 463));
 			add(new Position(805, 463));
 			add(new Position(855, 463));
-			// Sendero
-			add(new Position(491, 86));
+			add(new Position(491, 86));// Sendero
 			add(new Position(491, 128));
 			add(new Position(491, 168));
 			add(new Position(491, 210));
@@ -85,15 +78,15 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 	private HashMap<Station, Position> positionStation;
 
 	// Graphics
-	private JComboBox comboOrigin;
-	private JComboBox comboDestination;
+	private JComboBox<String> comboOrigin;
+	private JComboBox<String> comboDestination;
 	private JButton buttonOk;
 	private BufferedImage myPicture;
 	private Graphics2D g;
 	private JLabel labelImage;
 	private JPanel panelLeft;
 
-	public Map(Controller controleur, Station[] stations) throws IOException {
+	public Map(Controller controleur, Station[] stations){
 		this.controleur = controleur;
 		this.stations = stations;
 		this.positionStation = new HashMap<>();
@@ -113,9 +106,9 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 	 * Inicializa los JCombobox
 	 */
 	private void drawCombo() {
-		this.comboOrigin = new JComboBox();
-
-		this.comboDestination = new JComboBox();
+		this.comboOrigin = new JComboBox<String>();
+		this.comboDestination = new JComboBox<String>();
+		
 		for (int i = 0; i < stations.length; i++) {
 			this.comboOrigin.addItem(stations[i].getName());
 			this.comboDestination.addItem(stations[i].getName());
@@ -137,10 +130,6 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 		this.myPicture = ImageIO.read(new File(MAPFILE));
 		this.labelImage = new JLabel(new ImageIcon(myPicture));
 		labelImage.setBounds(0, 0, 1000, 700);
-
-		// Button and Box
-		this.comboOrigin.setSelectedIndex(o);
-		this.comboDestination.setSelectedIndex(d);
 
 		// Panel right
 		JPanel panelRight = new JPanel();
@@ -169,22 +158,13 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 		this.setVisible(true);
 	}
 
-	/*
-	 * public void drawCircles(Graphics2D g) { Color c = g.getColor();
-	 * 
-	 * for (Station s : this.positionStation.keySet()) { g.setColor(Color.RED);
-	 * g.fillOval(positionStation.get(s).getX() - 5, positionStation
-	 * .get(s).getY() - 5, RADIUS, RADIUS); } }
-	 */
-
 	/**
 	 * Dibuja un círculo a cada estación en parámetro
 	 * 
 	 * @param stations
 	 */
-	public void drawCamino(ArrayList<Station> stations) {
+	private void drawCamino(ArrayList<Station> stations) {
 		// Hace el camino según las estaciones en parámetro
-		Color c = g.getColor();
 		System.out.println("draw camino");
 		for (Station s : stations) {
 			System.out.println("draw " + s.getName());
@@ -201,7 +181,7 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == buttonOk) {
-		}
+			this.comboOrigin.updateUI();
 		try {
 			System.out.println("Origin : " + this.comboOrigin.getSelectedItem()
 					+ " Dest : " + this.comboDestination.getSelectedItem());
@@ -214,6 +194,7 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
 		}
 	}
 
@@ -230,16 +211,4 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 			e.printStackTrace();
 		}
 	}
-
-	/*
-	 * private void clearAndDraw(ArrayList<Station>s) {
-	 * System.out.println("Clear and draw");
-	 * this.panelLeft.remove(this.labelImage); try { this.myPicture =
-	 * ImageIO.read(new File(MAPFILE)); } catch (IOException e) { // TODO
-	 * Auto-generated catch block e.printStackTrace(); } this.labelImage = new
-	 * JLabel(new ImageIcon(myPicture)); this.labelImage.setBounds(0, 0, 1000,
-	 * 700); this.g = myPicture.createGraphics();
-	 * this.panelLeft.add(this.labelImage); drawCamino(s);
-	 * this.getContentPane().add(panelLeft, BorderLayout.WEST); }
-	 */
 }

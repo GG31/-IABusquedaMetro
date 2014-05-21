@@ -6,7 +6,6 @@ import Environment.Station;
 
 public class AlgoA {
 	private Station sf;
-	// private Station[] stations;
 	private int[][] distances;
 	private ArrayList<Station> openedList;
 	private ArrayList<Station> closedList;
@@ -15,11 +14,11 @@ public class AlgoA {
 
 	public AlgoA(int[][] distances) {
 		this.distances = distances;
-		// this.stations = stations;
+		
 		this.openedList = new ArrayList<>();
 		this.closedList = new ArrayList<>();
 		this.way = new ArrayList<>();
-		// this.si = null;
+		
 		this.sf = null;
 	}
 
@@ -31,27 +30,28 @@ public class AlgoA {
 		this.openedList.clear();
 		this.closedList.clear();
 		this.way.clear();
-
+		
 		this.openedList.add(si);
 		find(si);
+		// Si el origin es igual al destino
 		if (si.equals(sf)) {
 			ArrayList<Station> a = new ArrayList<>();
 			a.add(sf);
 			return a;
 		}
+		System.out.println("Longueur this.way " + this.way.size());
 		return this.way;
 	}
 
-	/*
+	/**
 	 * Encuentra recursivamente el mejor camino con el algo A*, almacena en los
 	 * atributos, almacena en wayToHere de cada nodo el camino más corto para ir
 	 * al nodo desde si
+	 * 
+	 * @param padre
 	 */
-	int tour = 0;
 
 	private void find(Station padre) {
-		System.out.println("tour " + tour);
-		tour++;
 		// Para cada hijo del padre
 		for (int i = 0; i < padre.getNeighbours().size(); i++) {
 			// Encuentra distancia entre padre e hijo
@@ -75,12 +75,14 @@ public class AlgoA {
 				padre.getNeighbours().get(i).addWayToHere(padre.getWayToHere());
 				padre.getNeighbours().get(i).addWayToHere(padre);
 				// Si el hijo hace parte de la lista cerrada
-				/*
-				 * if (this.closedList.contains(padre.getNeighbours().get(i))) {
-				 * // Faire hériter du nouveau chemin d'accés à tous les fils
-				 * System.out.println("PASO");
-				 * find(padre.getNeighbours().get(i)); }
-				 */
+
+				/*if (this.closedList.contains(padre.getNeighbours().get(i))
+						&& this.openedList.contains(padre.getNeighbours()
+								.get(i).equals(padre))) {
+					// Faire hériter du nouveau chemin d'accés à tous les fils
+					find(padre.getNeighbours().get(i));
+				}*/
+
 			}
 		}
 

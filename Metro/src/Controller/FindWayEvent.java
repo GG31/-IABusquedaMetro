@@ -11,7 +11,6 @@ public class FindWayEvent extends EventObject{
 	public FindWayEvent(Object source, ArrayList<Station> station) {
 		super(source);
 		this.stations = station;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ArrayList<Station> getStationsWay(){

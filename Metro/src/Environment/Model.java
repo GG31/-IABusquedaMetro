@@ -35,7 +35,7 @@ public class Model {
 		for (int i = 0; i < stations.length; i++) {
 			if (stations[i].getName().equals(origin)) {
 				si = stations[i];
-			} else if (stations[i].getName().equals(destination)) {
+			} if (stations[i].getName().equals(destination)) {
 				sf = stations[i];
 			}
 			if (sf != null && si != null)
@@ -43,6 +43,7 @@ public class Model {
 		}
 		if (sf == null || si == null) {
 			System.out.println("Una de las dos estaciones no existen");
+			System.out.println("si " + si + " sf " + sf);
 		}
 		this.way = algo.findWay(si, sf);
 		fireWayChanged();// Draw way

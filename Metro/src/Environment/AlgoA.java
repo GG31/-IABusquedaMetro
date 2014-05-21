@@ -6,7 +6,7 @@ import Environment.Station;
 
 public class AlgoA {
 	private Station sf;
-	//private Station[] stations;
+	// private Station[] stations;
 	private int[][] distances;
 	private ArrayList<Station> openedList;
 	private ArrayList<Station> closedList;
@@ -15,19 +15,30 @@ public class AlgoA {
 
 	public AlgoA(int[][] distances) {
 		this.distances = distances;
-		//this.stations = stations;
+		// this.stations = stations;
 		this.openedList = new ArrayList<>();
 		this.closedList = new ArrayList<>();
 		this.way = new ArrayList<>();
-		//this.si = null;
+		// this.si = null;
 		this.sf = null;
 	}
 
 	/* Devuelve el camino más corto entre si y sf */
 	public ArrayList<Station> findWay(Station si, Station sf) {
 		this.sf = sf;
+
+		// Limpiar
+		this.openedList.clear();
+		this.closedList.clear();
+		this.way.clear();
+
 		this.openedList.add(si);
 		find(si);
+		if (si.equals(sf)) {
+			ArrayList<Station> a = new ArrayList<>();
+			a.add(sf);
+			return a;
+		}
 		return this.way;
 	}
 

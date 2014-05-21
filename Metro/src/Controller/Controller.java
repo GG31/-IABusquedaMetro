@@ -34,6 +34,7 @@ public class Controller {
 
 	public void notifyWayChanged(String origin, String destination)
 			throws Exception {
+		System.out.println("notif");
 		model.ok(origin, destination);
 	}
 }

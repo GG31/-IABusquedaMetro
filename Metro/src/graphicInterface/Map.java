@@ -1,4 +1,4 @@
-package Interface;
+package graphicInterface;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,10 +20,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Controller.Controller;
-import Controller.FindWayEvent;
-import Controller.FindWayListener;
-import Environment.Station;
+import controller.Controller;
+import controller.FindWayEvent;
+import controller.FindWayListener;
+import environment.Station;
 
 public class Map extends JFrame implements ActionListener, FindWayListener {
 	private static final long serialVersionUID = 1L;

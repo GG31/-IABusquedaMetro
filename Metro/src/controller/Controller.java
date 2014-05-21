@@ -1,7 +1,7 @@
-package Controller;
+package controller;
 
-import Environment.Model;
-import Interface.Map;
+import environment.Model;
+import graphicInterface.Map;
 
 public class Controller {
 	public Map vue1 = null;

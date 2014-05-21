@@ -1,9 +1,9 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.EventObject;
 
-import Environment.Station;
+import environment.Station;
 
 public class FindWayEvent extends EventObject{
 	private ArrayList<Station> stations;

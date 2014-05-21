@@ -1,8 +1,8 @@
-package Environment;
+package environment;
 
 import java.util.ArrayList;
 
-import Environment.Station;
+import environment.Station;
 
 public class AlgoA {
 	private Station sf;

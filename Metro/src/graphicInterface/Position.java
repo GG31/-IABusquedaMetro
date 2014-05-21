@@ -1,4 +1,4 @@
-package Interface;
+package graphicInterface;
 
 public class Position {
 	private int x;

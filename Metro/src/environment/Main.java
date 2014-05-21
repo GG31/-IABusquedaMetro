@@ -1,6 +1,6 @@
-package Environment;
+package environment;
 
-import Controller.Controller;
+import controller.Controller;
 
 public class Main {
 

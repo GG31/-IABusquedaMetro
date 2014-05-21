@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import Environment.AlgoA;
-import Environment.Model;
-import Environment.ParserData;
-import Environment.Station;
+import environment.AlgoA;
+import environment.Model;
+import environment.ParserData;
+import environment.Station;
 
 public class AlgoTest {
 	AlgoA algo;

@@ -1,11 +1,11 @@
-package Environment;
+package environment;
 
 import java.util.ArrayList;
 
 import javax.swing.event.EventListenerList;
 
-import Controller.FindWayEvent;
-import Controller.FindWayListener;
+import controller.FindWayEvent;
+import controller.FindWayListener;
 
 public class Model {
 	private int[][] distance;

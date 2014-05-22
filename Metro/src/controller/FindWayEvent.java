@@ -1,9 +1,9 @@
-package Controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.EventObject;
 
-import Environment.Station;
+import environment.Station;
 
 public class FindWayEvent extends EventObject{
 	private ArrayList<Station> stations;
@@ -11,7 +11,6 @@ public class FindWayEvent extends EventObject{
 	public FindWayEvent(Object source, ArrayList<Station> station) {
 		super(source);
 		this.stations = station;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ArrayList<Station> getStationsWay(){

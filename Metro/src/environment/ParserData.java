@@ -1,4 +1,4 @@
-package Environment;
+package environment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,6 +14,9 @@ public class ParserData {
 		read();
 	}
 
+	/**
+	 * Lee el fichero, y rellena distances y stations
+	 */
 	private void read() {
 		Scanner sc;
 		try {
@@ -28,17 +31,11 @@ public class ParserData {
 					s = sc.nextLine();
 					parseStations(s);
 					break;
-				/*case "*Lines":
-					int j = 0;
-					s = sc.nextLine();
-					this.lines = new ArrayList<>();
-					s = sc.nextLine();
-					do {
-						parseLines(s, j);
-						j++;
-						s = sc.nextLine();
-					} while (!s.equals("*EndLines"));
-					break;*/
+				/*
+				 * case "*Lines": int j = 0; s = sc.nextLine(); this.lines = new
+				 * ArrayList<>(); s = sc.nextLine(); do { parseLines(s, j); j++;
+				 * s = sc.nextLine(); } while (!s.equals("*EndLines")); break;
+				 */
 				case "*Links":
 					int i = 0;
 					while (sc.hasNextLine()) {
@@ -65,7 +62,11 @@ public class ParserData {
 		}
 	}
 
-	/* Ok */
+	/**
+	 * Rellena station con todas la estaciones encontradas en el fichero
+	 * 
+	 * @param s
+	 */
 	private void parseStations(String s) {
 		String[] station = s.split(":");
 		int n = station.length;
@@ -76,35 +77,25 @@ public class ParserData {
 		}
 	}
 
-	/* ??? */
-	private void parseLines(String s, int numLine) {
-		ArrayList<Station> stationLine = new ArrayList<>();
-		String[] block = s.split(";");
-		for (int i = 0; i < block.length; i++) {
-			String[] sBlock = block[i].split("-");
-			if (sBlock.length > 1) {
-				// Añade todas las estaciones entre sBlock[0] y sBlock[1]
-				for (int j = Integer.parseInt(sBlock[0]); j <= Integer
-						.parseInt(sBlock[1]); j++) {
-					stationLine.add(this.stations[j]);
-					// System.out.println(this.stations[j].getName());
-					// System.out.println(stationLine.get(stationLine.size()-1).getName());
-				}
-			} else {
-				stationLine.add(this.stations[Integer.parseInt(sBlock[0])]);
-			}
-
-		}
-	}
-
-	/* Ok */
+	/**
+	 * Rellena las distancias entre las estaciones y añade las estaciones
+	 * vecinas a las estaciones encontrados en s
+	 * 
+	 * @param s
+	 * @param stationTreat
+	 */
 	private void parseLinks(String s, int stationTreat) {
 		String[] block = s.split(";");
 		parseDistance(block[0], stationTreat);
 		parseNeighbours(block[1], stationTreat);
 	}
 
-	/* Ok */
+	/**
+	 * Rellena distances[][] con s por la estación stationTreat
+	 * 
+	 * @param s
+	 * @param stationTreat
+	 */
 	private void parseDistance(String s, int stationTreat) {
 		String[] block = s.split(":");
 		for (int i = 0; i < this.distances.length; i++) {
@@ -112,7 +103,12 @@ public class ParserData {
 		}
 	}
 
-	/* Ok */
+	/**
+	 * Añade los vecinos a la estación stationTreat
+	 * 
+	 * @param s
+	 * @param stationTreat
+	 */
 	private void parseNeighbours(String s, int stationTreat) {
 		String[] block = s.split(":");
 		for (int i = 0; i < block.length; i++) {
@@ -122,6 +118,7 @@ public class ParserData {
 		}
 	}
 
+	// Getters
 	public Station[] getStation() {
 		return this.stations;
 	}

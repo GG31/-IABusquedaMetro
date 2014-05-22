@@ -1,4 +1,4 @@
-package Environment;
+package environment;
 
 import java.util.ArrayList;
 
@@ -65,5 +65,11 @@ public class Station {
 	
 	public ArrayList<Station> getWayToHere(){
 		return this.wayToHere;
+	}
+	
+	public void clear(){
+		this.g = 0;
+		this.f = 0;
+		this.wayToHere.clear();
 	}
 }

@@ -1,7 +1,7 @@
-package Controller;
+package controller;
 
-import Environment.Model;
-import Interface.Map;
+import environment.Model;
+import graphicInterface.Map;
 
 public class Controller {
 	public Map vue1 = null;
@@ -9,22 +9,25 @@ public class Controller {
 
 	public Controller(Model model) {
 		this.model = model;
-		this.vue1 = new Map(this);
+		this.vue1 = new Map(this, model.getStations());
 		addListenersToModel();
 	}
 
+	/**
+	 * Añade un listener al modelo
+	 */
 	private void addListenersToModel() {
 		this.model.addListener(vue1);
 	}
 
-	/*public void displayViews() {
-		vue1.display();
-	}
-
-	public void closeViews() {
-		vue1.close();
-	}*/
-
+	/**
+	 * Si pinchamos en ok, este método está llamado para empezar a buscar el
+	 * camino
+	 * 
+	 * @param origin
+	 * @param destination
+	 * @throws Exception
+	 */
 	public void notifyWayChanged(String origin, String destination)
 			throws Exception {
 		model.ok(origin, destination);

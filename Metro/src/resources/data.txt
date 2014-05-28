@@ -1,5 +1,5 @@
 *Stations
-Talleres:San Bernabé:Unidad Modelo:Aztlán:Penitenciaña:Alfonso Reyes:Mitras:Simón Bolívar:Hospital:Edison:Central:Cuauhtémoc:Del Golfo:Félix U.Gómez:Parque Fundidora:Y Griega:Eloy Cavazos:Lerdo de Tejada:Exposición:Sendero:Santiago Tapia:San Nicolás:Anáhuac:Universidad:Niño Héroes:Regina:General Anaya:Alameda:Fundadores:Padre Mier:General I. Zaragoza:Santa Lucía:Adolfo Prieto:Conchello:Violeta(Col.Moderna):Ruiz Cortines:Los Ángeles:Hospital Metropolitano
+Talleres:San Bernabé:Unidad Modelo:Aztlán:Penitenciaria:Alfonso Reyes:Mitras:Simón Bolívar:Hospital:Edison:Central:Cuauhtémoc:Del Golfo:Félix U.Gómez:Parque Fundidora:Y Griega:Eloy Cavazos:Lerdo de Tejada:Exposición:Sendero:Santiago Tapia:San Nicolás:Anáhuac:Universidad:Niño Héroes:Regina:General Anaya:Alameda:Fundadores:Padre Mier:General I. Zaragoza:Santa Lucía:Adolfo Prieto:Conchello:Violeta(Col.Moderna):Ruiz Cortines:Los Ángeles:Hospital Metropolitano
 %
 *Lines
 3

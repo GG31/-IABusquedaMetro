@@ -1,12 +1,19 @@
 package environment;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ParserData {
-	private final String FILENAME = "resources/data.txt";
+
+	private final String FILENAME ="/resources/data.txt";
 	private int[][] distances;
 	private Station[] stations;
 
@@ -18,28 +25,33 @@ public class ParserData {
 	 * Lee el fichero, y rellena distances y stations
 	 */
 	private void read() {
-		Scanner sc;
+
+		//Scanner sc;
 		try {
-			sc = new Scanner(new File(FILENAME));
-			while (sc.hasNextLine()) {
-				String s = sc.nextLine();
+				Class c = Class.forName("environment.ParserData");
+				InputStream ips = c.getResourceAsStream(FILENAME);
+	            InputStreamReader ipsr = new InputStreamReader(ips);
+	            BufferedReader br = new BufferedReader(ipsr);
+			//sc = new Scanner(new File(FILENAME));
+			String s;
+			while ((s = br.readLine()) != null) {
 				// char first = s.charAt(0);
 				switch (s) {
 				case "%":
 					break;
 				case "*Stations":
-					s = sc.nextLine();
+					s = br.readLine();
 					parseStations(s);
 					break;
 				/*
 				 * case "*Lines": int j = 0; s = sc.nextLine(); this.lines = new
-				 * ArrayList<>(); s = sc.nextLine(); do { parseLines(s, j); j++;
-				 * s = sc.nextLine(); } while (!s.equals("*EndLines")); break;
+				 * ArrayList<>(); s = sc.nextLine(); do { parseLines(s, j); j++; s =
+				 * sc.nextLine(); } while (!s.equals("*EndLines")); break;
 				 */
 				case "*Links":
 					int i = 0;
-					while (sc.hasNextLine()) {
-						s = sc.nextLine();
+					while ((s = br.readLine()) != null) {
+						//s = sc.nextLine();
 						if (s.charAt(0) == '%') {
 							// if (sc.hasNextLine())
 							// s = sc.nextLine();
@@ -54,12 +66,15 @@ public class ParserData {
 				}
 
 			}
-			sc.close();
-
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		} /*catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 
 	/**

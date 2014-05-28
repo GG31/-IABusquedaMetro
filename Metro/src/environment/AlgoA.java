@@ -40,6 +40,9 @@ public class AlgoA {
 			return a;
 		}
 		System.out.println("Longueur this.way " + this.way.size());
+		for(int i=0; i< this.way.size(); i++){
+			System.out.println("way " + this.way.get(i).getName());
+		}
 		return this.way;
 	}
 

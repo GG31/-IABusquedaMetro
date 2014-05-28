@@ -6,8 +6,12 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,9 +31,9 @@ import environment.Station;
 
 public class Map extends JFrame implements ActionListener, FindWayListener {
 	private static final long serialVersionUID = 1L;
-	private final int RADIUS = 10;
-	private final String MAPFILE = "resources/MapaMetroMonterrey.jpg";
-	private final ArrayList<Position> POSITIONS = new ArrayList<Position>() {
+	private static final int RADIUS = 10;
+	private static final String MAPFILE = "/resources/MapaMetroMonterrey.jpg";
+	private static final ArrayList<Position> POSITIONS = new ArrayList<Position>() {
 		{
 			add(new Position(144, 127));
 			add(new Position(203, 179));
@@ -127,10 +131,16 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 		this.setLayout(new BorderLayout());
 
 		// Map
-		this.myPicture = ImageIO.read(new File(MAPFILE));
+		Class c;
+		try {
+			c = Class.forName("graphicInterface.Map");
+        this.myPicture = ImageIO.read(c.getClass().getResource(MAPFILE));
 		this.labelImage = new JLabel(new ImageIcon(myPicture));
 		labelImage.setBounds(0, 0, 1000, 700);
-
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// Panel right
 		JPanel panelRight = new JPanel();
 		// Add layout to panel

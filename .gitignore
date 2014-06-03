@@ -5,3 +5,5 @@ Metro/.settings
 Metro/bin
 Metro/.classpath
 Metro/.project
+*.zip
+*.jar

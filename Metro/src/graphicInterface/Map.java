@@ -175,9 +175,7 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 	 */
 	private void drawCamino(ArrayList<Station> stations) {
 		// Hace el camino según las estaciones en parámetro
-		System.out.println("draw camino");
 		for (Station s : stations) {
-			System.out.println("draw " + s.getName());
 			g.setColor(Color.RED);
 			g.fillOval(positionStation.get(s).getX() - 5, positionStation
 					.get(s).getY() - 5, RADIUS, RADIUS);
@@ -193,8 +191,6 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 		if (e.getSource() == buttonOk) {
 			this.comboOrigin.updateUI();
 		try {
-			System.out.println("Origin : " + this.comboOrigin.getSelectedItem()
-					+ " Dest : " + this.comboDestination.getSelectedItem());
 			this.controleur.notifyWayChanged(
 					(String) this.comboOrigin.getSelectedItem(),
 					(String) this.comboDestination.getSelectedItem());
@@ -212,7 +208,6 @@ public class Map extends JFrame implements ActionListener, FindWayListener {
 	 * Una vez encontrado el camino, el modelo señala al mapa por este método
 	 */
 	public void wayChanged(FindWayEvent event) {
-		System.out.println("Way change " + event.getStationsWay().size());
 		ArrayList<Station> s = event.getStationsWay();
 		try {
 			this.draw(s, s.get(0).getId(), s.get(s.size() - 1).getId());

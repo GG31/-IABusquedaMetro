@@ -23,6 +23,7 @@ public class AlgoA {
 	}
 
 	/* Devuelve el camino más corto entre si y sf */
+	
 	public ArrayList<Station> findWay(Station si, Station sf) {
 		this.sf = sf;
 
@@ -38,10 +39,6 @@ public class AlgoA {
 			ArrayList<Station> a = new ArrayList<>();
 			a.add(sf);
 			return a;
-		}
-		System.out.println("Longueur this.way " + this.way.size());
-		for(int i=0; i< this.way.size(); i++){
-			System.out.println("way " + this.way.get(i).getName());
 		}
 		return this.way;
 	}
@@ -66,6 +63,7 @@ public class AlgoA {
 			int f = g
 					+ this.distances[padre.getNeighbours().get(i).getId()][this.sf
 							.getId()];
+			
 
 			// Si f calculado es menor que otro f calculado para este hijo i
 			if ((f < padre.getNeighbours().get(i).getF() && padre
@@ -77,15 +75,6 @@ public class AlgoA {
 				// Actualiza el camino
 				padre.getNeighbours().get(i).addWayToHere(padre.getWayToHere());
 				padre.getNeighbours().get(i).addWayToHere(padre);
-				// Si el hijo hace parte de la lista cerrada
-
-				/*if (this.closedList.contains(padre.getNeighbours().get(i))
-						&& this.openedList.contains(padre.getNeighbours()
-								.get(i).equals(padre))) {
-					// Faire hériter du nouveau chemin d'accés à tous les fils
-					find(padre.getNeighbours().get(i));
-				}*/
-
 			}
 		}
 
